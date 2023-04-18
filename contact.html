@@ -13,7 +13,29 @@
   <meta name="author" content="" />
 
   <title>UXOS</title>
-
+  <script type="text/javascript"  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+      (function() {
+          // https://dashboard.emailjs.com/admin/account
+          emailjs.init('vuWt9iqMCss3AY_ws');
+      })();
+  </script>
+  <script type="text/javascript">
+      window.onload = function() {
+          document.getElementById('contact-form').addEventListener('submit', function(event) {
+              event.preventDefault();
+              // generate a five digit number for the contact_number variable
+              this.contact_number.value = Math.random() * 100000 | 0;
+              // these IDs from the previous steps
+              emailjs.sendForm('service_r2p0q8t', 'template_3718z0e', this)
+                  .then(function() {
+                      console.log('SUCCESS!');
+                  }, function(error) {
+                      console.log('FAILED...', error);
+                  });
+          });
+      }
+  </script>
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
 
@@ -76,28 +98,99 @@
       <div class="row">
         <div class="col-md-6">
 
-          <form action="">
+          <form id="contact-form">
             <div class="contact_form-container">
               <div>
                 <div>
-                  <input type="text" placeholder="Name">
+                  <input type="text" name="user_name" placeholder="Nombre" required>
                 </div>
                 <div>
-                  <input type="text" placeholder="Phone Number">
+                  <input type="text" name="contact_number" placeholder="Número de teléfono" required>
                 </div>
                 <div>
-                  <input type="email" placeholder="Email">
+                  <input type="email" name="user_email" placeholder="Email" required>
                 </div>
-                <div class="mt-5">
-                  <input type="text" placeholder="Message">
+                <div>
+                  <input type="text" name="company_name" placeholder="Nombre de la empresa" required>
                 </div>
+
+                <br>
+    
+                <div class="form-check">
+                  <p><b>Dispositivos de la empresa</b></p>
+                  <input class="form-check-input" type="radio" name="flexRadioDefault1" value="computadoras" id="flexRadioDefault2">
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Computadoras
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault1" value="celulares"  id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Celulares
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input"  type="radio" name="flexRadioDefault1" value="ambos" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    Ambos
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault1" value="no hay dispositivos" id="flexRadioDefault2" checked>
+                  <label class="form-check-label" for="flexRadioDefault2">
+                    No hay dispositivos
+                  </label>
+                </div>
+                <br>
+                <br>
+                <div class="form-check">
+                  <p><b>Número de dispositivos de la empresa</b></p>
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="1-5" id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    1-5
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="6-10" id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    6-10
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="11-50"  id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    11-50
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="51-100" id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault3">
+                    51-100
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="más de 100" id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault23">
+                    más de 100
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="flexRadioDefault" value="no tengo" id="flexRadioDefault3" checked>
+                  <label class="form-check-label" for="flexRadioDefault23">
+                    No tengo
+                  </label>
+                </div>
+
                 <div class="mt-5">
-                  <button type="submit">
+                  <input type="text" name="user_extra" placeholder="Algo que quieras agregar">
+                </div>
+
+                <div class="mt-5">
+                  <button value="Send" type="submit">
                     send
                   </button>
                 </div>
               </div>
-
             </div>
 
           </form>
